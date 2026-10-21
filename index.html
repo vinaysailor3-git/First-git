@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f5f6f8" />
+  <title>Draftline — CAD viewer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Draftline home">
+        <span class="brand-mark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18.5V5.5h6.4c2.6 0 4.1 1.4 4.1 3.6 0 1.5-.8 2.6-2.1 3.1l3.7 6.3h-3.3l-3.3-5.8H7v5.8H4Zm3-8.3h3.1c.9 0 1.4-.4 1.4-1.2s-.5-1.2-1.4-1.2H7v2.4Z"/><path d="M17.1 5.5H21v3h-3.9v10h-3v-10h-1.2l1.8-3h2.4Z"/></svg></span>
+        <span class="brand-name">draftline<span class="brand-dot">.</span></span>
+      </a>
+      <div class="topbar-center"><span class="crumb">Workspace</span><span class="crumb-separator">/</span><span class="crumb current" id="crumb-name">Untitled drawing</span><span class="saved-status"><span></span> All changes saved</span></div>
+      <div class="topbar-actions">
+        <button class="icon-button help-button" id="help-button" aria-label="Help" title="Help"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.7 9a2.4 2.4 0 1 1 4.5 1.2c-.8 1.1-2.2 1.4-2.2 3.1M12 16.8h.01"/></svg></button>
+        <div class="avatar" title="You">V</div>
+        <button class="share-button" id="share-button"><svg viewBox="0 0 24 24"><path d="M12 15V3m0 0L7.5 7.5M12 3l4.5 4.5"/><path d="M5 12v7h14v-7"/></svg> Share</button>
+      </div>
+    </header>
+    <section class="workspace">
+      <aside class="sidebar">
+        <div class="project-card"><div class="project-icon"><svg viewBox="0 0 24 24"><path d="M4 5.5h16v13H4zM4 9h16M8 5.5V9"/></svg></div><div><span class="eyebrow">PROJECT</span><div class="project-name">Studio workspace <svg viewBox="0 0 16 16"><path d="m5 6 3 3 3-3"/></svg></div></div></div>
+        <div class="side-label">DRAWINGS <button id="new-drawing" aria-label="New drawing" title="New drawing">+</button></div>
+        <button class="file-row active" id="drawing-file"><span class="file-icon"><svg viewBox="0 0 20 20"><path d="M4 3h8l4 4v10H4zM12 3v4h4M7 11h6M7 14h6"/></svg></span><span class="file-name" id="sidebar-name">Untitled drawing</span><span class="file-menu">···</span></button>
+        <button class="upload-card" id="sidebar-upload"><span class="upload-plus">+</span><span>Upload a drawing</span><span class="upload-shortcut">⌘ O</span></button>
+        <div class="sidebar-bottom"><div class="storage-icon"><svg viewBox="0 0 24 24"><path d="M4 7h16l-1.5 12h-13L4 7Zm3 0a5 5 0 0 1 10 0M9 11v4m6-4v4"/></svg></div><div><span class="storage-title">Your workspace</span><span class="storage-caption">Files stay on this device</span></div><button class="more-button" aria-label="More options">···</button></div>
+      </aside>
+      <section class="main-area">
+        <div class="document-toolbar">
+          <div class="document-heading"><div class="document-icon"><svg viewBox="0 0 24 24"><path d="M5 3.5h9l5 5v12H5zM14 3.5v5h5M8 13h8M8 16.5h5"/></svg></div><div class="title-wrap"><div class="document-title" id="document-title" contenteditable="true" spellcheck="false">Untitled drawing</div><div class="document-meta"><span class="file-type">DWG</span><span class="meta-dot">·</span><span id="meta-size">No file loaded</span><span class="meta-dot">·</span><span>Edited just now</span></div></div></div>
+          <div class="toolbar-tools"><div class="mode-toggle"><button class="mode-button selected" id="select-mode" title="Select / pan (V)"><svg viewBox="0 0 24 24"><path d="m6 3 12 11-6 .5-3.5 6L6 3Z"/><path d="m12 15 3.5 5"/></svg><span>Select</span></button><button class="mode-button" id="pan-mode" title="Pan (H)"><svg viewBox="0 0 24 24"><path d="M8 12V6a1.5 1.5 0 0 1 3 0v5-7a1.5 1.5 0 0 1 3 0v7-5a1.5 1.5 0 0 1 3 0v7-3a1.5 1.5 0 0 1 3 0v6c0 3.3-2.4 6-5.7 6h-2.7c-1.5 0-2.8-.7-3.7-1.8L5 15a1.6 1.6 0 0 1 2.4-2L8 14"/></svg></button></div><div class="toolbar-divider"></div><button class="tool-button" id="distance-tool" title="Measure distance (D)"><svg viewBox="0 0 24 24"><path d="m4 17 13-13 3 3L7 20zM8 13l2 2m1-5 2 2m1-5 2 2"/></svg><span>Distance</span></button><button class="tool-button" id="area-tool" title="Measure area (A)"><svg viewBox="0 0 24 24"><path d="m4 17 3-10 8-3 5 7-4 9-12-3Z"/><path d="m7 7 9 13m-.5-16L4 17"/></svg><span>Area</span></button><button class="tool-button clear-tools" id="clear-measurements" title="Clear all distance and area measurements"><svg viewBox="0 0 24 24"><path d="M4 7h16M10 11v6m4-6v6M6 7l1 13h10l1-13M9 7V4h6v3"/></svg><span>Clear</span></button><div class="toolbar-divider"></div><button class="tool-button" id="layers-button" title="Drawing layers"><svg viewBox="0 0 24 24"><path d="m12 3 9 5-9 5-9-5 9-5Zm-9 9 9 5 9-5m-18 5 9 5 9-5"/></svg><span>Layers</span></button><button class="tool-button" id="fit-button" title="Fit drawing to view (F)"><svg viewBox="0 0 24 24"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/></svg><span>Fit view</span></button></div>
+        </div>
+        <div class="canvas-layout"><div class="drawing-stage" id="drawing-stage"><canvas id="cad-canvas" aria-label="CAD drawing canvas"></canvas><div class="empty-state" id="empty-state"><div class="empty-illustration"><div class="illustration-sheet"><div class="sheet-grid"></div><div class="plan-line l1"></div><div class="plan-line l2"></div><div class="plan-line l3"></div><div class="plan-line l4"></div><div class="plan-line l5"></div><div class="plan-line l6"></div><div class="plan-line l7"></div><div class="plan-line l8"></div><div class="sheet-label sl1"></div><div class="sheet-label sl2"></div><div class="sheet-dimension"></div></div><div class="sparkle sparkle-one">✳</div><div class="sparkle sparkle-two">✦</div></div><span class="empty-eyebrow">YOUR CANVAS IS READY</span><h1>Bring your drawings<br>into focus.</h1><p>Upload a DWG or DXF to view, explore, and measure<br>your plans right here in your browser.</p><button class="primary-upload" id="primary-upload"><svg viewBox="0 0 24 24"><path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5M5 15v5h14v-5"/></svg>Upload a drawing<span class="button-hint">⌘ O</span></button><div class="supported-formats"><span class="format-check">✓</span> DWG <span class="format-separator">·</span> DXF <span class="format-separator">·</span> Opens locally, stays private</div></div>
+          <div class="drop-overlay" id="drop-overlay"><div class="drop-inner"><div class="drop-icon"><svg viewBox="0 0 24 24"><path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5M5 15v5h14v-5"/></svg></div><strong>Drop your drawing here</strong><span>DWG or DXF files are supported</span></div></div>
+          <div class="canvas-top-left"><span class="sheet-dot"></span><span id="canvas-file-name">No drawing loaded</span><span class="canvas-badge">MODEL SPACE</span></div>
+          <div class="canvas-coordinates" id="coordinates">X 0.00&nbsp;&nbsp; Y 0.00</div>
+          <div class="zoom-controls"><button id="zoom-out" aria-label="Zoom out" title="Zoom out (−)"><svg viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4 4m-12-9h5.5"/></svg></button><button class="zoom-value" id="zoom-value" title="Reset zoom">100%</button><button id="zoom-in" aria-label="Zoom in" title="Zoom in (+)"><svg viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4 4m-12-9h5.5m-2.75-2.75v5.5"/></svg></button><span class="zoom-divider"></span><button id="canvas-fit" aria-label="Fit drawing" title="Fit to view"><svg viewBox="0 0 24 24"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/></svg></button></div>
+          <div class="measure-hint" id="measure-hint"></div><button class="close-area-button" id="close-area-button" type="button">Close area <kbd>Enter</kbd></button>
+          <div class="minimap" id="minimap"><div class="minimap-frame"><canvas id="mini-canvas"></canvas><div class="mini-viewport" id="mini-viewport"></div></div><div class="minimap-label"><span>MODEL SPACE</span><button id="minimap-toggle" aria-label="Collapse map">−</button></div></div>
+        </div><div class="statusbar"><div class="status-left"><span class="status-live"><span></span> Ready</span><span class="status-separator"></span><span id="cursor-position">X: 0.00&nbsp;&nbsp; Y: 0.00</span><span class="status-separator"></span><span>Units: <button class="unit-select" id="unit-select">mm <svg viewBox="0 0 12 12"><path d="m3 4.5 3 3 3-3"/></svg></button></span></div><div class="status-right"><span><kbd>Space</kbd> + drag to pan</span><span class="status-separator"></span><span>Scroll to zoom</span><span class="status-separator"></span><span class="status-shortcuts">SHORTCUTS</span></div></div>
+      </section>
+    </section>
+    <input id="file-input" type="file" accept=".dwg,.dxf,application/acad,application/dxf" hidden />
+    <div class="toast" id="toast" role="status"></div>
+    <div class="modal-backdrop" id="help-modal"><div class="modal-card"><button class="modal-close" data-close="help-modal">×</button><span class="modal-eyebrow">QUICK GUIDE</span><h2>Make yourself at home.</h2><p>Draftline runs in your browser. Your files stay on this device.</p><div class="shortcut-list"><div><span>Open a drawing</span><kbd>⌘ O</kbd></div><div><span>Zoom in / out</span><kbd>+ &nbsp; −</kbd></div><div><span>Fit drawing to view</span><kbd>F</kbd></div><div><span>Measure distance</span><kbd>D</kbd></div><div><span>Measure area</span><kbd>A</kbd></div><div><span>Finish an area</span><kbd>Double click</kbd></div><div><span>Pan canvas</span><kbd>Space + drag</kbd></div><div><span>Cancel measurement</span><kbd>Esc</kbd></div></div></div></div>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/dxf-parser@1.1.2/dist/dxf-parser.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
